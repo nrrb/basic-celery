@@ -1,4 +1,4 @@
-# Testing Celery + redis + Flask
+# Basic Celery + redis + Flask App
 
 The simplest example possible to test your Celery and redis setup. 
 
