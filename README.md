@@ -4,13 +4,13 @@ The simplest example possible to test your Celery and redis setup.
 
 Make sure [redis-server](https://redis.io/) is installed. For the Mac:
 
-```
+```bash
 brew install redis
 ```
 
 Set up your Python3 virtual environment:
 
-```
+```bash
 python3 -m venv venv && source venv/bin/activate
 pip install -r requirements.txt
 ```
@@ -25,31 +25,31 @@ redis==5.0.8
 
 Run `redis-server`:
 
-```
+```bash
 redis-server
 ```
 
 Run the Flask app:
 
-```
+```bash
 python app.py
 ```
 
 Run a Celery worker:
 
-```
+```bash
 celery -A app.celery worker --loglevel=info
 ```
 
 Submit a task to the Flask app using curl:
 
-```
+```bash
 curl -X POST http://127.0.0.1:5000/add -H "Content-Type: application/json" -d '{"x": 5, "y": 7}'
 ```
 
 You'll get output back looking something like this:
 
-```
+```json
 {
   "task_id": "f23924fe-9fda-4d60-8aa7-a739c1dfd0ed"
 }
@@ -57,14 +57,14 @@ You'll get output back looking something like this:
 
 Using the `task_id` from the output, substitute it into this command and run it to check on the task status:
 
-```
+```bash
 curl http://127.0.0.1:5000/task/f23924fe-9fda-4d60-8aa7-a739c1dfd0ed
 ```
 
 
 If both `redis-server` and the Celery worker are running, you should get back output like this:
 
-```
+```json
 {
   "result": 12,
   "state": "SUCCESS"
